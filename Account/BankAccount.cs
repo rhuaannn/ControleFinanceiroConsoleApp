@@ -161,7 +161,7 @@ public class BankAccount : Account
             {
                 NumberAccount[accountNumber] = currentBalance - amount;
                 Console.WriteLine("Withdrawal made successfully");
-                RegisterWithdrawalAccountHistory.Add(accountNumber, currentBalance - amount);
+                RegisterWithdrawalAccountHistory.Add(accountNumber, amount);
             }
         }
         else
