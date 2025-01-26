@@ -1,14 +1,17 @@
 ﻿
 using ControleFinanceiroConsoleApp.User;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ControleFinanceiroConsoleApp.Account;
 public class BankAccount : Account
 {
     public override Dictionary<int, double> NumberAccount { get; set; } = new Dictionary<int, double>();
     public override Dictionary<int, double> RegisterDepositAccountHistory { get; set; } = new Dictionary<int, double>();
-    public override Dictionary<int, double> RegisterWithdrawalAccountHistory { get; set; } = new Dictionary<int, double>();
-
+    // public override List<double> RegisterWithdrawalAccountHistory { get; set; } = new List<double>();
     public Dictionary<int, int> AccountUserAssociation { get; set; } = new Dictionary<int, int>();
+
+    private List<(int accountNumber, double amount)> RegisterWithdrawalAccountHistory = new List<(int accountNumber, double amount)>();
 
     public void CreateBankAccount()
     {
@@ -75,6 +78,12 @@ public class BankAccount : Account
 
             currentBalance += amount;
             NumberAccount[accountNumber] = currentBalance;
+            if (RegisterDepositAccountHistory.ContainsKey(accountNumber))
+            {
+                accountNumber += 1;
+                RegisterDepositAccountHistory.Add(accountNumber, currentBalance);
+                return currentBalance;
+            }
             RegisterDepositAccountHistory.Add(accountNumber, currentBalance);
             Console.WriteLine($"Deposit made successfully {amount}");
             return amount;
@@ -149,6 +158,7 @@ public class BankAccount : Account
         var accountNumber = int.Parse(Console.ReadLine());
         Console.Write("Digite o valor do saque: ");
         var amount = double.Parse(Console.ReadLine());
+
         if (NumberAccount.ContainsKey(accountNumber))
         {
             double currentBalance = NumberAccount[accountNumber];
@@ -159,9 +169,10 @@ public class BankAccount : Account
             }
             else
             {
+                DateTime data = DateTime.Now;
                 NumberAccount[accountNumber] = currentBalance - amount;
-                Console.WriteLine("Withdrawal made successfully");
-                RegisterWithdrawalAccountHistory.Add(accountNumber, amount);
+                Console.WriteLine($"Withdrawal made successfully! Data {data}");
+                RegisterWithdrawalAccountHistory.Add((accountNumber, amount));
             }
         }
         else
@@ -175,12 +186,12 @@ public class BankAccount : Account
     {
         Console.Write("Digite o número da conta: ");
         var accountNumber = int.Parse(Console.ReadLine());
-        if (RegisterWithdrawalAccountHistory.ContainsKey(accountNumber))
+        if (RegisterWithdrawalAccountHistory.Any(w => w.accountNumber == accountNumber))
         {
             Console.WriteLine("=== Histórico de Saques ===");
-            foreach (var withdrawal in RegisterWithdrawalAccountHistory)
+            foreach (var withdrawal in RegisterWithdrawalAccountHistory.Where(w => w.accountNumber == accountNumber))
             {
-                Console.WriteLine($"Valor: {withdrawal.Value}");
+                Console.WriteLine($"Número da conta:{accountNumber} - Valor: {withdrawal.amount}");
             }
         }
         else
