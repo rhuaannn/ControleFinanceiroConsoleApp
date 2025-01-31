@@ -1,7 +1,5 @@
 ﻿
 using ControleFinanceiroConsoleApp.User;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ControleFinanceiroConsoleApp.Account;
 public class BankAccount : Account

@@ -5,9 +5,10 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        var bankAccount = new BankAccount();
-        var users = new Dictionary<Guid, Users>();
-        var user = new Users();
+        BankAccount bankAccount = new BankAccount();
+        UserService userService = new UserService();
+        GetInputUser getInputUser = new GetInputUser();
+        Users user = new Users();
 
 
         while (true)
@@ -30,16 +31,16 @@ public class Program
             switch (option)
             {
                 case "1":
-                    user.CreateUser(users);
+                    userService.AddUser(getInputUser.GetInput());
                     break;
                 case "2":
-                    user.ListUsers(users);
+                    userService.ListUsers();
                     break;
                 case "3":
                     bankAccount.CreateBankAccount();
                     break;
                 case "4":
-                    bankAccount.LinkUserAccount(users, bankAccount);
+                    bankAccount.LinkUserAccount(userService.users, bankAccount);
                     break;
                 case "5":
                     bankAccount.Deposit();
@@ -67,15 +68,6 @@ public class Program
             Console.WriteLine("\nPressione qualquer tecla para continuar...");
             Console.ReadKey();
         }
-
-
-
-
-
-
-
-
-
     }
 
 }
