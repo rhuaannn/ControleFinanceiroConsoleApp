@@ -12,14 +12,14 @@ public class GetInputUser
         Console.Write("Digite a senha: ");
         string password = Console.ReadLine();
 
-        Users user = new Users
+        try
         {
-            Id = Guid.NewGuid(),
-            Name = name,
-            Email = email,
-            Phone = phone,
-            Password = password
-        };
-        return user;
+            return new Users(name, email, phone, password);
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Erro: {ex.Message}");
+            return null;
+        }
     }
 }

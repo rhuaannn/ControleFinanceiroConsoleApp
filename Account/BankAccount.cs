@@ -6,7 +6,6 @@ public class BankAccount : Account
 {
     public override Dictionary<int, double> NumberAccount { get; set; } = new Dictionary<int, double>();
     public override Dictionary<int, double> RegisterDepositAccountHistory { get; set; } = new Dictionary<int, double>();
-    // public override List<double> RegisterWithdrawalAccountHistory { get; set; } = new List<double>();
     public Dictionary<int, int> AccountUserAssociation { get; set; } = new Dictionary<int, int>();
 
     private List<(int accountNumber, double amount)> RegisterWithdrawalAccountHistory = new List<(int accountNumber, double amount)>();

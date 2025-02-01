@@ -8,7 +8,6 @@ public class Program
         BankAccount bankAccount = new BankAccount();
         UserService userService = new UserService();
         GetInputUser getInputUser = new GetInputUser();
-        Users user = new Users();
 
 
         while (true)
