@@ -1,5 +1,5 @@
 ﻿using ControleFinanceiroConsoleApp.User;
-using ControleFinanceiroConsoleApp.Validation;
+using ControleFinanceiroConsoleApp.User.Validation;
 
 public class UserService : Validation
 {
@@ -21,13 +21,10 @@ public class UserService : Validation
             }
             else
             {
-
                 users.Add(user.Id, user);
                 Console.WriteLine($"O Id gerado é {user.Id}");
                 Console.WriteLine("Usuário criado com sucesso!");
-
             }
-
         }
         else
         {
@@ -35,7 +32,6 @@ public class UserService : Validation
             return;
         }
     }
-
     public void ListUsers()
     {
         if (users.Count == 0)
@@ -50,7 +46,6 @@ public class UserService : Validation
             Console.WriteLine($"ID: {user.Key}, Nome: {user.Value.Name}, E-mail: {user.Value.Email}");
         }
     }
-
     public override bool VerifyEmailInUser(string email)
     {
         if (users.Values.Any(user => user.Email == email))
@@ -59,7 +54,6 @@ public class UserService : Validation
         }
         return false;
     }
-
     public override bool VerifyPhoneInUser(string phone)
     {
         if (users.Values.Any(user => user.Phone == phone))

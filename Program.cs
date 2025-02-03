@@ -5,9 +5,12 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        BankAccount bankAccount = new BankAccount();
-        UserService userService = new UserService();
         GetInputUser getInputUser = new GetInputUser();
+        UserService userService = new UserService();
+
+        AccountService GetInputAccount = new AccountService();
+        AccountService accountService = new AccountService();
+        GetInputAccount getInputAccount = new GetInputAccount(accountService);
 
 
         while (true)
@@ -22,7 +25,8 @@ public class Program
             Console.WriteLine("6. Sacar");
             Console.WriteLine("7. Transferir");
             Console.WriteLine("8. Consultar Saldo");
-            Console.WriteLine("9. Verificar Histório de saque");
+            Console.WriteLine("9. Verificar Histórico de saque");
+            Console.WriteLine("10. Verificar Histórico de depósito");
             Console.WriteLine("0. Sair");
             Console.Write("Escolha uma opção: ");
             string option = Console.ReadLine();
@@ -36,25 +40,28 @@ public class Program
                     userService.ListUsers();
                     break;
                 case "3":
-                    bankAccount.CreateBankAccount();
+                    getInputAccount.CreateBankAccount();
                     break;
                 case "4":
-                    bankAccount.LinkUserAccount(userService.users, bankAccount);
+                    getInputAccount.LinkUserAccount();
                     break;
                 case "5":
-                    bankAccount.Deposit();
+                    getInputAccount.Deposit();
                     break;
                 case "6":
-                    bankAccount.Withdrawal();
+                    getInputAccount.Withdrawal();
                     break;
                 case "8":
-                    bankAccount.GetBalance();
+                    getInputAccount.GetBalance();
                     break;
                 case "7":
-                    bankAccount.TransferValue();
+                    getInputAccount.TransferValue();
                     break;
                 case "9":
-                    bankAccount.VerifyHistoryWithdrawal();
+                    getInputAccount.VerifyHistoryWithdrawal();
+                    break;
+                case "10":
+                    getInputAccount.VerifyHistoryDeposit();
                     break;
                 case "0":
                     Console.WriteLine("Saindo do sistema...");

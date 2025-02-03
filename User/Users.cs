@@ -9,19 +9,15 @@ namespace ControleFinanceiroConsoleApp.User
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public List<BankAccount> BankAccounts { get; set; } = new List<BankAccount>();
+        public List<AccountService> BankAccounts { get; set; } = new List<AccountService>();
 
         public Users(string name, string email, string phone, string password)
         {
             Id = Guid.NewGuid();
             Name = name;
+            Email = email;
             Phone = phone;
             Password = password;
-
-            if (ValidateEmail(email))
-            {
-                Email = email;
-            }
 
         }
     }

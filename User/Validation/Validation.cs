@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-namespace ControleFinanceiroConsoleApp.Validation;
+namespace ControleFinanceiroConsoleApp.User.Validation;
 public abstract class Validation
 {
     public bool ValidateEmail(string email)
