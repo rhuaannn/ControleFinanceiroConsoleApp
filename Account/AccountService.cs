@@ -4,10 +4,20 @@ public class AccountService : Account
     public override Dictionary<int, double> NumberAccount { get; set; } = new Dictionary<int, double>();
     public Dictionary<int, Guid> AccountUserAssociation { get; set; } = new Dictionary<int, Guid>();
 
+    private readonly Validation _validationAccount;
+
+    public AccountService(Validation validation)
+    {
+        _validationAccount = validation;
+    }
 
     public void CreateBankAccount(int number, double balance)
     {
-        if (NumberAccount.ContainsKey(number))
+        if (!_validationAccount.ValidateAccountNumber(number))
+        {
+            return;
+        }
+        else if (NumberAccount.ContainsKey(number))
         {
             Console.WriteLine("Account already exists!");
             return;

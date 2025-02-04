@@ -8,8 +8,8 @@ public class Program
         GetInputUser getInputUser = new GetInputUser();
         UserService userService = new UserService();
 
-        AccountService GetInputAccount = new AccountService();
-        AccountService accountService = new AccountService();
+        Validation validation = new Validation();
+        AccountService accountService = new AccountService(validation);
         GetInputAccount getInputAccount = new GetInputAccount(accountService);
 
 

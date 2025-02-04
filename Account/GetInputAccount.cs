@@ -1,6 +1,4 @@
-﻿using ControleFinanceiroConsoleApp.User;
-
-namespace ControleFinanceiroConsoleApp.Account;
+﻿namespace ControleFinanceiroConsoleApp.Account;
 public class GetInputAccount
 {
     private readonly AccountService _accountService;
@@ -135,6 +133,7 @@ public class GetInputAccount
 
         var history = _accountService.RegisterWithdrawalAccountHistory
                        .Where(h => h.accountNumber == accountNumber);
+
         if (history != default)
         {
             Console.WriteLine($"Histórico de saques para a conta {accountNumber}:{history.Count()}");
