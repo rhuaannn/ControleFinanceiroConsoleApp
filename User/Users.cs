@@ -1,4 +1,5 @@
 ﻿using ControleFinanceiroConsoleApp.Account;
+using ControleFinanceiroConsoleApp.User.Validation;
 
 namespace ControleFinanceiroConsoleApp.User
 {
@@ -6,16 +7,15 @@ namespace ControleFinanceiroConsoleApp.User
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
+        public Email Email { get; set; } 
         public string Phone { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public List<AccountService> BankAccounts { get; set; } = new List<AccountService>();
 
         public Users(string name, string email, string phone, string password)
-        {
-            Id = Guid.NewGuid();
+        { 
             Name = name;
-            Email = email;
+            Email = new Email(email);
             Phone = phone;
             Password = password;
 
