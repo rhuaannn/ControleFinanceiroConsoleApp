@@ -1,4 +1,6 @@
-﻿namespace ControleFinanceiroConsoleApp.User;
+﻿using ControleFinanceiroConsoleApp.User.ValueObject;
+
+namespace ControleFinanceiroConsoleApp.User;
 public class GetInputUser
 {
     public Users GetInput()
@@ -6,7 +8,7 @@ public class GetInputUser
         Console.Write("Digite o nome: ");
         string name = Console.ReadLine();
         Console.Write("Digite o e-mail: ");
-        string email = Console.ReadLine();
+        string emailAddress = Console.ReadLine();
         Console.Write("Digite o telefone: ");
         string phone = Console.ReadLine();
         Console.Write("Digite a senha: ");
@@ -14,6 +16,7 @@ public class GetInputUser
 
         try
         {
+            Email email = new Email(emailAddress);
             return new Users(name, email, phone, password);
         }
         catch (ArgumentException ex)

@@ -1,5 +1,6 @@
 ﻿using ControleFinanceiroConsoleApp.Account;
 using ControleFinanceiroConsoleApp.User;
+using ControleFinanceiroConsoleApp.User.ValueObject; // Adicione esta linha
 
 public class Program
 {
@@ -11,7 +12,6 @@ public class Program
         Validation validation = new Validation();
         AccountService accountService = new AccountService(validation);
         GetInputAccount getInputAccount = new GetInputAccount(accountService);
-
 
         while (true)
         {
@@ -34,7 +34,11 @@ public class Program
             switch (option)
             {
                 case "1":
-                    userService.AddUser(getInputUser.GetInput());
+                    Users user = getInputUser.GetInput();
+                    if (user != null)
+                    {
+                        userService.AddUser(user.Name, user.Email, user.Phone, user.Password);
+                    }
                     break;
                 case "2":
                     userService.ListUsers();
@@ -75,5 +79,4 @@ public class Program
             Console.ReadKey();
         }
     }
-
 }

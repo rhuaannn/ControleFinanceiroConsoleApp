@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
 
-namespace ControleFinanceiroConsoleApp.User.Validation;
+namespace ControleFinanceiroConsoleApp.User.ValueObject;
 
 
     public class Email
@@ -16,7 +16,6 @@ namespace ControleFinanceiroConsoleApp.User.Validation;
             }
             Address = address;
         }
-
         public Email(string address)
         {
             SetEmail(address);

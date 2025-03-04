@@ -1,35 +1,23 @@
 ﻿using ControleFinanceiroConsoleApp.User;
-using ControleFinanceiroConsoleApp.User.Validation;
+using ControleFinanceiroConsoleApp.User.ValueObject;
 
-public class UserService : Validation
+public class UserService
 {
     public Dictionary<Guid, Users> users = new Dictionary<Guid, Users>();
 
-    public void AddUser(Users user)
+    public void AddUser(string name, Email email, string phone, string password)
     {
-        if (ValidateEmail(user.Email))
+        try
         {
-            if (VerifyEmailInUser(user.Email))
-            {
-                Console.WriteLine("E-mail já cadastrado!");
-                return;
-            }
-            else if (VerifyPhoneInUser(user.Phone))
-            {
-                Console.WriteLine("Telefone já cadastrado!");
-                return;
-            }
-            else
-            {
-                users.Add(user.Id, user);
-                Console.WriteLine($"O Id gerado é {user.Id}");
-                Console.WriteLine("Usuário criado com sucesso!");
-            }
+            Users newUser = new Users(name, email, phone, password);
+
+            users.Add(newUser.Id, newUser);
+
+            Console.WriteLine($"Usuário '{name}' adicionado com sucesso! ID: {newUser.Id}");
         }
-        else
+        catch (ArgumentException ex)
         {
-            Console.WriteLine("E-mail inválido!");
-            return;
+            Console.WriteLine($"Erro ao adicionar usuário: {ex.Message}");
         }
     }
     public void ListUsers()
@@ -43,23 +31,7 @@ public class UserService : Validation
         Console.WriteLine("=== Lista de Usuários ===");
         foreach (var user in users)
         {
-            Console.WriteLine($"ID: {user.Key}, Nome: {user.Value.Name}, E-mail: {user.Value.Email}");
+            Console.WriteLine($"ID: {user.Key}, Nome: {user.Value.Name}, E-mail: {user.Value.Email.Address}");
         }
-    }
-    public override bool VerifyEmailInUser(string email)
-    {
-        if (users.Values.Any(user => user.Email == email))
-        {
-            return true;
-        }
-        return false;
-    }
-    public override bool VerifyPhoneInUser(string phone)
-    {
-        if (users.Values.Any(user => user.Phone == phone))
-        {
-            return true;
-        }
-        return false;
     }
 }
