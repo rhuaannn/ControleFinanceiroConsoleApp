@@ -9,11 +9,28 @@ public class UserService
     {
         return users.Values.Any(u => u.Email.Address == email);
     }
-    public void AddUser(string name, Email email, Phone phone, string password)
+
+    public bool PhoneIsValid(string number)
+    {
+        if (number.Length != 11)
+        {
+            return false;
+
+        }
+
+        return true;
+    }
+    public void AddUser(Name name, Email email, Phone phone, string password)
     {
         if (EmailExists(email.Address))
         {
             Console.WriteLine("Email já existe!");
+            return;
+        }
+
+        if (!PhoneIsValid(phone.Number))
+        {
+            Console.WriteLine("Numero inválado!");
             return;
         }
         try

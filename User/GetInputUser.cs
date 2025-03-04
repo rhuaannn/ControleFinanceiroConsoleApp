@@ -6,7 +6,7 @@ public class GetInputUser
     public Users GetInput()
     {
         Console.Write("Digite o nome: ");
-        string name = Console.ReadLine();
+        string isName = Console.ReadLine();
         Console.Write("Digite o e-mail: ");
         string emailAddress = Console.ReadLine();
         Console.Write("Digite o telefone: ");
@@ -18,6 +18,7 @@ public class GetInputUser
         {
             Email email = new Email(emailAddress);
             Phone phone = new Phone(isPhone);
+            Name name = new Name(isName);
             return new Users(name, email, phone, password);
         }
         catch (ArgumentException ex)
