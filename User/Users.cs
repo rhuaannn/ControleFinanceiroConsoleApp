@@ -8,11 +8,11 @@ namespace ControleFinanceiroConsoleApp.User
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; } = string.Empty;
         public Email Email { get; set; } 
-        public string Phone { get; set; } = string.Empty;
+        public Phone Phone { get; set; }
         public string Password { get; set; } = string.Empty;
         public List<AccountService> BankAccounts { get; set; } = new List<AccountService>();
 
-        public Users(string name, Email email, string phone, string password)
+        public Users(string name, Email email, Phone phone, string password)
         { 
             Name = name;
             Email = email;

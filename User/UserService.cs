@@ -5,8 +5,17 @@ public class UserService
 {
     public Dictionary<Guid, Users> users = new Dictionary<Guid, Users>();
 
-    public void AddUser(string name, Email email, string phone, string password)
+    public bool EmailExists(string email)
     {
+        return users.Values.Any(u => u.Email.Address == email);
+    }
+    public void AddUser(string name, Email email, Phone phone, string password)
+    {
+        if (EmailExists(email.Address))
+        {
+            Console.WriteLine("Email já existe!");
+            return;
+        }
         try
         {
             Users newUser = new Users(name, email, phone, password);

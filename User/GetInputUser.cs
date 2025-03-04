@@ -10,13 +10,14 @@ public class GetInputUser
         Console.Write("Digite o e-mail: ");
         string emailAddress = Console.ReadLine();
         Console.Write("Digite o telefone: ");
-        string phone = Console.ReadLine();
+        string isPhone = Console.ReadLine();
         Console.Write("Digite a senha: ");
         string password = Console.ReadLine();
 
         try
         {
             Email email = new Email(emailAddress);
+            Phone phone = new Phone(isPhone);
             return new Users(name, email, phone, password);
         }
         catch (ArgumentException ex)
